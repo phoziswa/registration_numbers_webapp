@@ -1,16 +1,16 @@
-let assert = require("assert");
-let registrations = require("../registrations");
+// let assert = require("assert");
+// let registrations = require("../registrations");
 
 
-describe(' Adding function', function () {
-    it('should add the reg number if it is not in the list ', function () {
+// describe(' Adding function', function () {
+//     it('should add the reg number if it is not in the list ', function () {
 
-        var instance = RegNumbersFactory();
+//         var instance = RegNumbersFactory();
 
-        instance.addingRegsToList("CA 12345");
+//         instance.addingRegsToList("CA 12345");
 
-        assert.deepEqual(instance.getReg(), ["CA 12345"]);
-    });
+//         assert.deepEqual(instance.getReg(), ["CA 12345"]);
+//     });
 //     it('should add two registration numbers in the list', function () {
 
 //         var instance = RegNumbersFactory();
@@ -75,4 +75,6 @@ describe(' Adding function', function () {
 //     it('should return false if the registration number entered in the text box is incorrect', function () {
 //         assert.equal(regex.test('CAW 12340006'), false)
 //     })
-});
+// });
+
+

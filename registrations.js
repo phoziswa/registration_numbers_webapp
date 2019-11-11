@@ -1,30 +1,35 @@
-module.exports = function RegNumbersFactory(regPlate) {
-    var list = regPlate;
-    var cityRegs = regPlate || [];
-  
+module.exports = function RegNumbersFactory(pool) {
 
-    function addingRegsToList(reg) {
-        let tag = reg.toUpperCase().split(' ')[0];
-        if (validation(tag)) {
-            if (regExCheck(reg)) {
-                cityRegs.push(reg.toUpperCase());
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
+    async function addingRegsToList(regPlate) {
+        let reg = regPlate;
+
+        let registrations = await pool.query('SELECT * FROM registrations WHERE registration_num = $1', [reg])
+        if (registrations.rows.length !== 0) {
+            return true;
         }
-    };
+
+        let id;
+        let allTowns = await pool.query('SELECT * FROM town;');
+
+        for (let i = 0; i < allTowns.rows.length; i++) {
+            id = allTowns.rows[i].id;
+            let townCode = allTowns.rows[i].plate_code;
+            if (regPlate.startsWith(townCode)) {
+                await pool.query('INSERT INTO registrations (registration_num ,town_id) VALUES ($1,$2)', [reg, id])
+            }
+        }
+    }
+
+    async function getReg() {
+        var registrationNums = await pool.query('SELECT * FROM registrations')
+        return registrationNums.rows;
+    }
 
     function regExist(plate) {
         return cityRegs.includes(plate)
     };
 
-    function getReg() {
-        return cityRegs;
-    };
-
+  
     function registrationNums(townTag) {
         var townsList = [];
 
@@ -69,19 +74,12 @@ module.exports = function RegNumbersFactory(regPlate) {
         return false;
     }
 
-
-
-    function clearLocalStorage() {
-        cityRegs = []
-    }
-
     return {
         addingRegsToList,
         getReg,
         registrationNums,
         regExist,
         validation,
-        clearLocalStorage
-
+        regExCheck
     }
 }
