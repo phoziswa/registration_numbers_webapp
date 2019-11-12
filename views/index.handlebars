@@ -1,52 +1,52 @@
-            <div class="row">
-            <div class="col-12">
-                <h1>Registration number list</h1>
-            </div>
+<div class="row">
+    <div class="col-12">
+        <h1>Registration number list</h1>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="error">
+        <div class="displayFlash">{{{info}}}</div>
+
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-12">
+        <form action="/" method="POST">
+            <span>
+                <h4> Registration numbers:
+            </span>
+            <span>
+                <input name="regnums" class="textArea" placeholder="Enter the registration number"
+                    maxlength="10"></input>
+                <button class="addButton" type="submit" name="button">Add</button></h4>
+            </span>
+        </form>
+
+        <h4 class="example">i.e CA 123-456 or CA 12345</h4>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="radio">
+            <span>
+                <span> <input type="radio" name="btn" class="townButton" value="CA">Cape town</span>
+                <span> <input type="radio" name="btn" class="townButton" value="CX">Knysna</span>
+                <span> <input type="radio" name="btn" class="townButton" value="CY">Bellville</span>
+                <span> <input type="radio" name="btn" class="townButton" value="all">showAll</span>
+                <span> <input class="showBtn" type="button" value="show"></span>
+                <span> <input type="button" name="button" class="clearBtn" value="clear!"></span>
+            </span>
         </div>
-        <br>
-        <div class="row">
-            <div class="error">
-                <div class="displayFlash">{{{info}}}</div>
+    </div>
+</div>
+<br>
 
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-12">
-
-                <span>
-                    <h4> Registration numbers:
-                </span>
-                <span>
-                    <input name="regnums" class="textArea" placeholder="Enter the registration number"
-                        maxlength="10"></input>
-
-                    <button class="addButton" type="button" name="button">Add</button></h4>
-                </span>
-
-                <h4 class="example">i.e CA 123-456 or CA 12345</h4>
-
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                <div class="radio">
-                    <span>
-                        <span> <input type="radio" name="btn" class="townButton" value="CA">Cape town</span>
-                        <span> <input type="radio" name="btn" class="townButton" value="CX">Knysna</span>
-                        <span> <input type="radio" name="btn" class="townButton" value="CY">Bellville</span>
-                        <span> <input type="radio" name="btn" class="townButton" value="all">showAll</span>
-                        <span> <input class="showBtn" type="button" value="show"></span>
-                        <span> <input type="button" name="button" class="clearBtn" value="clear!"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <br>
-
-        <div class="row">
-            <div class="col-12">
-            <div class="regContainer">{{{reg}}}</div>
-        </div>
-        </div>
+<div class="row">
+    <div class="col-12">
+        <div class="regContainer">{{{reg}}}</div>
+    </div>
+</div>

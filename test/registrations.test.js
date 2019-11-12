@@ -1,5 +1,5 @@
 const assert = require('assert');
-const Registrations = require('../registrations');
+const RegNumbersFactory = require('../registrations');
 const pg = require("pg");
 const Pool = pg.Pool;
 
@@ -18,18 +18,19 @@ describe('registration numbers webapp', function () {
 
     it('should add a registration number', async function () {
         let instance = RegNumbersFactory(pool);
-        // await instance.town('Cape town','CA')
-        await instance.addingRegsToList('CA 123 123');
+        await instance.town('Knysna', 'CX')
+        await instance.addingRegsToList('CX 123 021');
         let regnumber = await instance.getReg();
-        assert.equal(1, regnumber.length);
+        assert.equal(regnumber.length, 1);
     });
 
     it('should not add a registration number if it is on the database already', async function () {
         let instance = RegNumbersFactory(pool);
-        // await instance.town('Cape town','CA')
-        await instance.addingRegsToList('CA 123 123');
-        await instance.addingRegsToList('CA 123 123');
+        await instance.town('Cape town', 'CA')
+        await instance.addingRegsToList('CA 132 021');
+        await instance.addingRegsToList('CA 132 021');
         let regnumber = await instance.getReg();
-        assert.equal(1, regnumber.length);
+        assert.equal(regnumber.length, 1);
     });
 });
+

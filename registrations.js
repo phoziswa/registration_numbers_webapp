@@ -24,6 +24,11 @@ module.exports = function RegNumbersFactory(pool) {
         var registrationNums = await pool.query('SELECT * FROM registrations')
         return registrationNums.rows;
     }
+    async function town(city, code) {
+        let fullReg = await pool.query('INSERT INTO town (town_name, plate_code) VALUES ($1,$2)', [city, code])
+        return fullReg;
+    }
+
 
     function regExist(plate) {
         return cityRegs.includes(plate)
@@ -76,6 +81,7 @@ module.exports = function RegNumbersFactory(pool) {
     return {
         addingRegsToList,
         getReg,
+        town,
         registrationNums,
         regExist,
         validation,

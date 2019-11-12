@@ -46,7 +46,11 @@ app.use(bodyParser.json())
 
 app.use(flash());
 
-app.get('/', async function (req, res, ){
+app.get('/', async function (req, res){
+  res.render('index')
+})
+
+app.post('/', async function (req, res){
   var regnumbers = req.body.regnums;
   var list = await instance.getReg()
 
