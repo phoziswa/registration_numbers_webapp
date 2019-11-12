@@ -9,7 +9,7 @@ module.exports = function RegNumbersFactory(pool) {
         }
 
         let id;
-        let allTowns = await pool.query('SELECT * FROM town;');
+        let allTowns = await pool.query('SELECT * FROM town');
 
         for (let i = 0; i < allTowns.rows.length; i++) {
             id = allTowns.rows[i].id;
@@ -29,7 +29,6 @@ module.exports = function RegNumbersFactory(pool) {
         return cityRegs.includes(plate)
     };
 
-  
     function registrationNums(townTag) {
         var townsList = [];
 
@@ -56,9 +55,9 @@ module.exports = function RegNumbersFactory(pool) {
     };
 
     function regExCheck(plate) {
-        
+
         var toUpper = plate.toUpperCase();
-        
+
         var regex = /([A-Z]){2}\s+([0-9]){3}\S([0-9]){3}/g;
         var regex2 = /([A-Z]){2}\s+([0-9]){5}/g;
 

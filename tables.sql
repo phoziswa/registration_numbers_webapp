@@ -3,7 +3,7 @@ create table town(
 	town_name text not null,
 	plate_code text not null
 );
-create table registrations (
+create table registrations(
 	id serial not null primary key,
     registration_num text not null,
 	town_id int,

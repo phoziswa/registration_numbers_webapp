@@ -46,17 +46,17 @@ app.use(bodyParser.json())
 
 app.use(flash());
 
-app.get('/', async function (req, res, ) {
+app.get('/', async function (req, res, ){
   var regnumbers = req.body.regnums;
   var list = await instance.getReg()
 
-  if (regnumbers === "") {
+  if (regnumbers === ""){
     req.flash("info", "Please enter a registration number")
   }
   await instance.addingRegsToList(regnumbers)
 
-  res.render('index', {
-    regnumbers: list
+  res.render('index',{
+    reg: list
   });
 })
 

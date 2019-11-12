@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/registrations.css">
-    {{!-- <link rel="stylesheet" href="css/regs-grid.css"> --}}
-
-</head>
-
-<body>
-    <div class="col-6">
-        <div class="row">
+            <div class="row">
             <div class="col-12">
                 <h1>Registration number list</h1>
             </div>
@@ -21,7 +6,7 @@
         <br>
         <div class="row">
             <div class="error">
-                 <div class="displayFlash">{{{info}}}</div>
+                <div class="displayFlash">{{{info}}}</div>
 
             </div>
         </div>
@@ -40,7 +25,7 @@
                 </span>
 
                 <h4 class="example">i.e CA 123-456 or CA 12345</h4>
-                
+
             </div>
         </div>
 
@@ -52,8 +37,8 @@
                         <span> <input type="radio" name="btn" class="townButton" value="CX">Knysna</span>
                         <span> <input type="radio" name="btn" class="townButton" value="CY">Bellville</span>
                         <span> <input type="radio" name="btn" class="townButton" value="all">showAll</span>
-                        <span><input class="showBtn" type="button" value="show"></span>
-                        <span><input type="button" name="button" class="clearBtn" value="clear!"></span>
+                        <span> <input class="showBtn" type="button" value="show"></span>
+                        <span> <input type="button" name="button" class="clearBtn" value="clear!"></span>
                     </span>
                 </div>
             </div>
@@ -61,10 +46,7 @@
         <br>
 
         <div class="row">
-
-            <div class="col-12"></div>
-            <div class="regContainer">
-
-            </div>
+            <div class="col-12">
+            <div class="regContainer">{{{reg}}}</div>
         </div>
-    </div>
+        </div>
