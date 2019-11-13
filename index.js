@@ -13,7 +13,7 @@ if (process.env.DATABASE_URL && !local) {
   useSSL = true;
 }
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://phoziswa:lubanzi25@localhost:5432/registration_numbers';
+const connectionString = process.env.DATABASE_URL || 'postgresql://codex:codex123@localhost:5432/registration_numbers';
 
 const pool = new Pool({
   connectionString,
@@ -53,6 +53,9 @@ app.get('/', async function (req, res){
 app.post('/', async function (req, res){
   var regnumbers = req.body.regnums;
   var list = await instance.getReg()
+
+  console.log({regnumbers, list});
+  
 
   if (regnumbers === ""){
     req.flash("info", "Please enter a registration number")

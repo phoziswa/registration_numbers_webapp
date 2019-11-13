@@ -11,6 +11,9 @@ module.exports = function RegNumbersFactory(pool) {
         let id;
         let allTowns = await pool.query('SELECT * FROM town');
 
+        console.log(allTowns.rows);
+        
+
         for (let i = 0; i < allTowns.rows.length; i++) {
             id = allTowns.rows[i].id;
             let townCode = allTowns.rows[i].plate_code;
@@ -29,6 +32,21 @@ module.exports = function RegNumbersFactory(pool) {
         return fullReg;
     }
 
+
+
+    async function filter(town) {
+
+        filteredRegNums = await pool.query('SELECT registrations. registration_num, town.plate_code FROM registrations INNER JOIN town ON registrations.town_id = town.id;')
+        filteredRegNums = filteredRegNums.rows
+       
+        for (let i = 0; i < filteredRegNums.length; i++) {
+        
+            if (filteredRegNums[i].town_tag === town) {
+                filterCities.push(filteredRegNums[i].registration_num)
+            }
+      }
+        return filterCities;
+    }
 
     function regExist(plate) {
         return cityRegs.includes(plate)
@@ -82,6 +100,7 @@ module.exports = function RegNumbersFactory(pool) {
         addingRegsToList,
         getReg,
         town,
+        filter,
         registrationNums,
         regExist,
         validation,

@@ -6,7 +6,7 @@
 <br>
 <div class="row">
     <div class="error">
-        <div class="displayFlash">{{{info}}}</div>
+        <div class="displayFlash">{{error}}</div>
 
     </div>
 </div>
@@ -46,7 +46,8 @@
 <br>
 
 <div class="row">
-    <div class="col-12">
-        <div class="regContainer">{{{reg}}}</div>
+   {{#each reg}}
+    {{this.registration_num}}
+  {{/each}}
     </div>
 </div>
