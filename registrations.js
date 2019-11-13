@@ -10,8 +10,6 @@ module.exports = function RegNumbersFactory(pool) {
 
         let id;
         let allTowns = await pool.query('SELECT * FROM town');
-
-        console.log(allTowns.rows);
         
 
         for (let i = 0; i < allTowns.rows.length; i++) {

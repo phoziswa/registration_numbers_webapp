@@ -54,7 +54,7 @@ app.post('/', async function (req, res){
   var regnumbers = req.body.regnums;
   var list = await instance.getReg()
 
-  console.log({regnumbers, list});
+  // console.log({regnumbers, list});
   
 
   if (regnumbers === ""){
