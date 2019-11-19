@@ -34,75 +34,32 @@ describe('registration numbers webapp', function () {
     });
 });
 describe('filter function', function () {
-    it('should filter for the registration numbers from cape town ',async function () {
+    it('should filter for the registration numbers from cape town ', async function () {
         var instance = RegNumbersFactory(pool);
         await instance.town('Cape town', 'CA')
         await instance.addingRegsToList("CA 123 234");
-        await instance.addingRegsToList("CK 12345");
-        let regNum = await instance.filter('CA');
+        await instance.addingRegsToList("Cx 12345");
+        var regNum = await instance.filter('CA');
         assert.equal('CA 123 234', regNum);
     });
 
+    it('should filter for registration numbers from Knysna ', async function () {
+        var instance = RegNumbersFactory(pool);
+        await instance.town('Knysna', 'CX')
+        await instance.addingRegsToList("CX 123 234");
+        await instance.addingRegsToList("CA 12345");
+        await instance.addingRegsToList("CY 12345");
+        var regNum = await instance.filter('CX');
+        assert.equal('CX 123 234', regNum);
 
-    // it('should filter for registration numbers from Knysna ', function () {
-    //     var instance = RegNumbersFactory(pool);
+    });
+    it('should  filter for registration numbers from bellville', async function () {
+        var instance = RegNumbersFactory(pool);
+        await instance.town('Bellville', 'CY')
+        await instance.addingRegsToList("CY 123 145");
+        await instance.addingRegsToList("CA 12345");
+        var regNum = await instance.filter('CY');
+        assert.equal('CY 123 145', regNum);
 
-    //     await instance.addingRegsToList("CK 34587");
-    //     await instance.addingRegsToList("CX 12345");
-    //     await instance.addingRegsToList("CX 24689");
-    //     await instance.addingRegsToList("CL 12345");
-    //     await instance.addingRegsToList("CK 12345");
-
-    //     assert.deepEqual(instance.registrationNums('CX'), ["CX 12345", "CX 24689"]);
-    // });
-    // it('should  filter for registration numbers from bellville', function () {
-    //     var instance = RegNumbersFactory(pool);
-
-    //     await instance.addingRegsToList("CY 12345");
-    //     await instance.addingRegsToList("CY 24689");
-    //     await instance.addingRegsToList("CL 12345");
-    //     await instance.addingRegsToList("CK 12345");
-
-    //     assert.deepEqual(instance.registrationNums('CY'), ["CY 12345", "CY 24689"]);
-    // });
-    // it('should return the registration numbers from Cape town , Knysna and Bellville', function () {
-    //     var instance = RegNumbersFactory(pool);
-
-    //     await instance.addingRegsToList("CY 24689");
-    //     await instance.addingRegsToList("CA 12345");
-    //     await instance.addingRegsToList("CK 12345");
-
-    //     assert.deepEqual(instance.registrationNums('CY'), ["CA 123 145", "CY 2468 219", "CX 545 262"]);
-    // });
-
-    // it('should filter for registration numbers from Knysna ', function () {
-    //     var instance = RegNumbersFactory(pool);
-
-    //     await instance.addingRegsToList("CK 34587");
-    //     await instance.addingRegsToList("CX 12345");
-    //     await instance.addingRegsToList("CX 24689");
-    //     await instance.addingRegsToList("CL 12345");
-    //     await instance.addingRegsToList("CK 12345");
-
-    //     assert.deepEqual(instance.registrationNums('CX'), ["CX 12345", "CX 24689"]);
-    // });
-    // it('should  filter for registration numbers from bellville', function () {
-    //     var instance = RegNumbersFactory(pool);
-
-    //     await instance.addingRegsToList("CY 12345");
-    //     await instance.addingRegsToList("CY 24689");
-    //     await instance.addingRegsToList("CL 12345");
-    //     await instance.addingRegsToList("CK 12345");
-
-    //     assert.deepEqual(instance.registrationNums('CY'), ["CY 12345", "CY 24689"]);
-    // });
-    // it('should return the registration numbers from Cape town , Knysna and Bellville', function () {
-    //     var instance = RegNumbersFactory(pool);
-
-    //     await instance.addingRegsToList("CY 24689");
-    //     await instance.addingRegsToList("CA 12345");
-    //     await instance.addingRegsToList("CK 12345");
-
-    //     assert.deepEqual(instance.registrationNums('CY'), ["CA 123 145", "CY 2468 219", "CX 545 262"]);
-    // });
+    });
 });

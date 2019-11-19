@@ -10,9 +10,9 @@ create table registrations(
 	foreign key (town_id) references town(id)
 );
 
-insert into town (town_name, plate_code) values('Cape town', 'CA');
-insert into town (town_name, plate_code) values('Knysna', 'CX');
-insert into town (town_name, plate_code) values('Bellville', 'CY');
+-- insert into town (town_name, plate_code) values('Cape town', 'CA');
+-- insert into town (town_name, plate_code) values('Knysna', 'CX');
+-- insert into town (town_name, plate_code) values('Bellville', 'CY');
 
 
 

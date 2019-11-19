@@ -1,50 +1,54 @@
-body{
-    background-color: aqua;
-  
-  }
-  
-  .plates {
-    border-radius: 25px;
-    border: solid black;
-    margin-bottom: 0.5em;
-    margin-left: 2em;
-    display: block;
-    background:yellow;
-    padding: 10px; 
-    width: 115px;
-    text-align: center;
-    height: 20px;
-    font-size: 20px; 
-    float : left;
-    
-  }
-    h1{
-      font-style: oblique;
-      font-size: 50px;
-      text-align: center;
-      width: 500px;
-      border: 5px solid black;
-      padding: 20px;
-      margin: 10px;
-  
-    }
-    .error{
-      font-size: 20px; 
-      margin-left: 2em;
-      color: red;
-      font-style: italic;
-  
-    }
-    .col-6{
-      float: left;
-    }
-    .errorMessage{
-      font-size: 20px; 
-      margin-left: 2em;
-      color: orangered;
-      font-style: italic;
-  
-    }
-    .example{
-      margin-left: 1.5em;
-    }
+body {
+  background-image: url(b.png); 
+  background-size: cover;
+  background-position: center;
+  width: 50%;
+
+}
+
+.plates {
+  border-radius: 10px;
+  border: solid black;
+  margin-bottom: 0.5em;
+  margin-left: 2em;
+  background: yellow;
+  padding: 2px;
+  width: 115px;
+  text-align: center;
+  float: left;
+}
+
+h1 {
+  font-style: oblique;
+  font-size: 50px;
+  text-align: center;
+  width: 600px;
+  border: 5px solid black;
+  padding: 20px;
+  margin: 20px;
+}
+
+.error {
+  font-size: 20px;
+  margin-left: 2em;
+  color: red;
+  font-style: italic;
+}
+
+.col-6 {
+  float: left;
+}
+
+.errorMessage {
+  font-size: 20px;
+  margin-left: 2em;
+  color: orangered;
+  font-style: italic;
+}
+
+.example {
+  margin-left: 1.5em;
+}
+.radio{
+  font-size: 1.5em;
+}

@@ -46,26 +46,40 @@ app.use(bodyParser.json())
 
 app.use(flash());
 
-app.get('/', async function (req, res){
+app.get('/', function (req, res) {
   res.render('index')
-})
+});
 
-app.post('/', async function (req, res){
+app.post('/reg_numbers', async function (req, res) {
   var regnumbers = req.body.regnums;
   var list = await instance.getReg()
 
-  // console.log({regnumbers, list});
-  
-
-  if (regnumbers === ""){
+  if (regnumbers === "") {
     req.flash("info", "Please enter a registration number")
   }
   await instance.addingRegsToList(regnumbers)
 
-  res.render('index',{
+  res.render('index', {
     reg: list
   });
-})
+});
+
+app.post('/clear', async function (req, res) {
+  await instance.clearDatabase()
+  res.render('index')
+});
+
+app.post('/filter', async function (req, res) {
+  var town_radio_buttons = req.body.town_values;
+  var filt = await instance.filter(town_radio_buttons);
+  console.log('filter input',town_radio_buttons);
+  
+console.log('filter results=====',filt);
+
+  res.render('index',{
+    filt
+  });
+});
 
 const PORT = process.env.PORT || 3014;
 app.listen(PORT, function () {
