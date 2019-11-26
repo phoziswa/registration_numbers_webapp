@@ -52,13 +52,24 @@ app.get('/', function (req, res) {
 
 app.post('/reg_numbers', async function (req, res) {
   var regnumbers = req.body.regnums;
+
+  var regex1 = /([A-Z]){2}\s+([0-9]){3}\s([0-9]){3}/g;
+  var regex = /[A-Z]{2}\s[0-9]{6}/g;
+  var reg2 = regex1.test(regnumbers)
+  var reg = regex.test(regnumbers)
+
   var list = await instance.getReg()
 
-  if (regnumbers === "") {
+  if (regnumbers == '') {
     req.flash("info", "Please enter a registration number")
   }
-  await instance.addingRegsToList(regnumbers)
-
+  if (reg2 === true || reg === true) {
+    await instance.addingRegsToList(regnumbers)
+  }
+   else {
+    req.flash("info", "Invalid registration number, the valid starts with CA,CY and CX")
+  }
+  
   res.render('index', {
     reg: list
   });
@@ -70,13 +81,10 @@ app.post('/clear', async function (req, res) {
 });
 
 app.post('/filter', async function (req, res) {
-  var town_radio_buttons = req.body.town_values;
+  var town_radio_buttons = req.body.town_name;
   var filt = await instance.filter(town_radio_buttons);
-  console.log('filter input',town_radio_buttons);
-  
-console.log('filter results=====',filt);
 
-  res.render('index',{
+  res.render('index', {
     filt
   });
 });

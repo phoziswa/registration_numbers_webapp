@@ -18,22 +18,18 @@ module.exports = function RegNumbersFactory(pool) {
             }
         }
     }
-
     async function getReg() {
         var registrationNums = await pool.query('SELECT * FROM registrations;')
         return registrationNums.rows;
     }
-
     async function town(city, code) {
         var regNum = await pool.query('INSERT INTO town (town_name, plate_code) VALUES ($1,$2)', [city, code])
         return regNum;
     }
-
     async function clearDatabase() {
         var clear = await pool.query('DELETE FROM registrations ')
         return clear;
     }
-
     async function filter(town) {
 
         filteredRegNums = getReg()
@@ -50,7 +46,14 @@ module.exports = function RegNumbersFactory(pool) {
         return filterCities;
     }
 
-    // function validation(tag) {
+    function regexCheck(plate_num) {
+        var regex = /[A-Z]{2}\s[0-9]{6}/g;
+        var reg = regex.test(plate_num)
+        var reg1 = regex.test(plate_num)
+        return !reg && !reg1
+    }
+
+   // function validation(tag) {
     //     var validNums = ["CA", "CY", "CX"];
     //     for (let index = 0; index < validNums.length; index++) {
     //         const element = validNums[index];
@@ -64,33 +67,15 @@ module.exports = function RegNumbersFactory(pool) {
     //     return cityRegs.includes(plate)
     // };
 
-    // function regExCheck(plate) {
-
-    //     var toUpper = plate.toUpperCase();
-
-    //     var regex = /([A-Z]){2}\s+([0-9]){3}\S([0-9]){3}/g;
-    //     var regex2 = /([A-Z]){2}\s+([0-9]){5}/g;
-
-    //     var testRegex = regex.test(toUpper);
-    //     var testRegex2 = regex2.test(toUpper)
-
-    //     if (testRegex) {
-    //         return testRegex;
-    //     }
-    //     if (testRegex2) {
-    //         return testRegex2;
-    //     }
-    //     return false;
-    // }
-
     return {
         addingRegsToList,
         getReg,
         town,
         clearDatabase,
         filter,
-        regExist,
-        validation,
-        regExCheck
+        regexCheck
+        // regExist,
+        // validation,
+        // regExCheck
     }
 }

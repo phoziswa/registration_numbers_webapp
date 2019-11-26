@@ -18,7 +18,7 @@
     <br>
     <div class="row">
         <div class="error">
-            <div class="displayFlash">{{info}}</div>
+            <div class="displayFlash">{{messages.info}}</div>
 
         </div>
     </div>
@@ -30,7 +30,6 @@
                 <div class="input-group mb-3">
                     <input name="regnums" class="textArea" placeholder="Enter a registration number"
                         maxlength="10"></input>
-
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-success">Add</button>
                     </div>
@@ -44,12 +43,13 @@
     <form action="/filter" method="post">
         <div class="row">
             <div class="col-12">
-                <div class="                                                                                                                        radio">
+                <div
+                    class="                                                                                                                        radio">
                     <span>
-                        <span> <input type="radio" name="town_values" class="townButton" value="CA">Cape town</span>
-                        <span> <input type="radio" name="town_values" class="townButton" value="CX">Knysna</span>
-                        <span> <input type="radio" name="town_values" class="townButton" value="CY">Bellville</span>
-                        <span> <input type="radio" name="town_values" class="townButton" value="All">showAll</span>
+                        <span> <input type="radio" name="town_name" class="townButton" value="CA">Cape town</span>
+                        <span> <input type="radio" name="town_name" class="townButton" value="CX">Knysna</span>
+                        <span> <input type="radio" name="town_name" class="townButton" value="CY">Bellville</span>
+                        <span> <input type="radio" name="town_name" class="townButton" value="All">showAll</span>
                         <button type="submit" class="btn btn-warning">Show</button>
 
                     </span>
@@ -61,30 +61,26 @@
     <form action="/clear" method="post">
         <div>
 
-            <button type="submit" class="btn btn-info">Clear_data</button>
-            
+            <button type="submit" class="btn btn-info">Clear data</button>
+
         </div>
     </form>
     <br>
     <br>
-    <div class="row">
+    <div>
         <ul>
             {{#each reg}}
             <li style="list-style:none" class="plates">{{this.registration_num}}</li>
             {{/each}}
         </ul>
     </div>
-
- <div class="row">
+    <div>
         <ul>
             {{#each filt}}
             <li style="list-style:none" class="plates">{{this.registration_num}}</li>
             {{/each}}
         </ul>
     </div>
-
-
-
 </body>
 
 </html>

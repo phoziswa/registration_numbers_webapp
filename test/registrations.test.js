@@ -34,32 +34,44 @@ describe('registration numbers webapp', function () {
     });
 });
 describe('filter function', function () {
-    it('should filter for the registration numbers from cape town ', async function () {
-        var instance = RegNumbersFactory(pool);
-        await instance.town('Cape town', 'CA')
-        await instance.addingRegsToList("CA 123 234");
-        await instance.addingRegsToList("Cx 12345");
-        var regNum = await instance.filter('CA');
-        assert.equal('CA 123 234', regNum);
-    });
 
     it('should filter for registration numbers from Knysna ', async function () {
         var instance = RegNumbersFactory(pool);
         await instance.town('Knysna', 'CX')
         await instance.addingRegsToList("CX 123 234");
-        await instance.addingRegsToList("CA 12345");
-        await instance.addingRegsToList("CY 12345");
+        await instance.addingRegsToList("CY 123 345");
         var regNum = await instance.filter('CX');
-        assert.equal('CX 123 234', regNum);
+        assert.deepEqual([{ registration_num: 'CX 123 234', plate_code: 'CX' }], regNum);
 
     });
     it('should  filter for registration numbers from bellville', async function () {
         var instance = RegNumbersFactory(pool);
         await instance.town('Bellville', 'CY')
         await instance.addingRegsToList("CY 123 145");
-        await instance.addingRegsToList("CA 12345");
+        await instance.addingRegsToList("CA 123 445");
         var regNum = await instance.filter('CY');
-        assert.equal('CY 123 145', regNum);
+        assert.deepEqual([{ registration_num: 'CY 123 145', plate_code: 'CY' }], regNum);
 
     });
+    // it('should filter for the registration numbers from cape town ', async function () {
+    //     var instance = RegNumbersFactory(pool);
+    //     await instance.town('Cape town', 'CA')
+    //     await instance.addingRegsToList("CX 123 234");
+    //     await instance.addingRegsToList("CA 123 145");
+    //     await instance.addingRegsToList("CY 123 045");
+    //     var regNum = await instance.filter('CA');
+    //     assert.deepEqual([{ registration_num: 'CA 123 145', plate_code: 'CA' }], regNum);
+    // });
+
+});
+
+describe('regex function', function () {
+    let regex = /[A-Z]{2}\s[0-9]{5}$/gm;
+    it('should return true if the registration number entered in the text box is correct', function () {
+        assert.equal(regex.test('CA 12346'), true)
+    })
+
+    it('should return false if the registration number entered in the text box is incorrect', function () {
+        assert.equal(regex.test('CAW 12340006'), false)
+    })
 });

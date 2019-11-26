@@ -1,9 +1,5 @@
 body {
-  background-image: url(b.png); 
-  background-size: cover;
-  background-position: center;
-  width: 50%;
-
+  background-color: ivory;
 }
 
 .plates {
