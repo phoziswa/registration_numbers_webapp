@@ -55,26 +55,38 @@ app.post('/reg_numbers', async function (req, res) {
 
   var regex1 = /([A-Z]){2}\s+([0-9]){3}\s([0-9]){3}/g;
   var regex = /[A-Z]{2}\s[0-9]{6}/g;
+ 
   var reg2 = regex1.test(regnumbers)
   var reg = regex.test(regnumbers)
 
-  var list = await instance.getReg()
+  
+  var error = await instance.addingRegsToList(regnumbers)
+
+
+  if(!error){
+  
+    req.flash("info", "registration number already exits")
+  }
 
   if (regnumbers == '') {
     req.flash("info", "Please enter a registration number")
+    return res.redirect('/')
   }
   if (reg2 === true || reg === true) {
     await instance.addingRegsToList(regnumbers)
   }
    else {
     req.flash("info", "Invalid registration number, the valid starts with CA,CY and CX")
+    return res.redirect('/')
   }
-  
+
+  var list = await instance.getReg()
+
   res.render('index', {
     reg: list
   });
 });
-
+                                                                                                                                                                                                                                                                                
 app.post('/clear', async function (req, res) {
   await instance.clearDatabase()
   res.render('index')
@@ -89,7 +101,7 @@ app.post('/filter', async function (req, res) {
   });
 });
 
-const PORT = process.env.PORT || 3014;
+const PORT = process.env.PORT || 3011;
 app.listen(PORT, function () {
   console.log('App starting on port', PORT);
 });

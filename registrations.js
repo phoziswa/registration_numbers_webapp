@@ -1,23 +1,28 @@
 module.exports = function RegNumbersFactory(pool) {
 
     async function addingRegsToList(regPlate) {
-        var reg = regPlate;
 
-        var registrations = await pool.query('SELECT * FROM registrations WHERE registration_num = $1', [reg])
+        var registrations = await pool.query('SELECT * FROM registrations WHERE registration_num = $1', [regPlate])
+
         if (registrations.rows.length !== 0) {
-            return true;
+            return false;
         }
-        var id;
+
         var allTowns = await pool.query('SELECT * FROM town');
 
         for (var i = 0; i < allTowns.rows.length; i++) {
-            id = allTowns.rows[i].id;
+           var id = allTowns.rows[i].id;
             var townCode = allTowns.rows[i].plate_code;
             if (regPlate.startsWith(townCode)) {
-                await pool.query('INSERT INTO registrations (registration_num ,town_id) VALUES ($1,$2)', [reg, id])
+                
+                var inserting = await pool.query('INSERT INTO registrations (registration_num ,town_id) VALUES ($1,$2)', [regPlate, id])
+                console.log(inserting.rows);
+
+                return inserting.rows;
             }
         }
     }
+
     async function getReg() {
         var registrationNums = await pool.query('SELECT * FROM registrations;')
         return registrationNums.rows;
@@ -53,20 +58,6 @@ module.exports = function RegNumbersFactory(pool) {
         return !reg && !reg1
     }
 
-   // function validation(tag) {
-    //     var validNums = ["CA", "CY", "CX"];
-    //     for (let index = 0; index < validNums.length; index++) {
-    //         const element = validNums[index];
-    //         if (element == tag) {
-    //             return true
-    //         }
-    //     }
-    //     return false
-    // };
-    // function regExist(plate) {
-    //     return cityRegs.includes(plate)
-    // };
-
     return {
         addingRegsToList,
         getReg,
@@ -74,8 +65,6 @@ module.exports = function RegNumbersFactory(pool) {
         clearDatabase,
         filter,
         regexCheck
-        // regExist,
-        // validation,
-        // regExCheck
+
     }
 }

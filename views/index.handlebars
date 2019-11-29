@@ -10,12 +10,14 @@
 </head>
 
 <body>
+    <div class="">
     <div class="row">
         <div class="col-12">
-            <h1>Registration number list</h1>
+            <h1>Registration numbers list</h1>
         </div>
     </div>
     <br>
+    <div class="center">
     <div class="row">
         <div class="error">
             <div class="displayFlash">{{messages.info}}</div>
@@ -24,10 +26,10 @@
     </div>
     <br>
     <div class="row">
-        <div class="col-12">
+        <div style="padding-left: 30%" class="col-12">
             <form action="/reg_numbers" method="POST">
 
-                <div class="input-group mb-3">
+                <div class="input-group mb-6">
                     <input name="regnums" class="textArea" placeholder="Enter a registration number"
                         maxlength="10"></input>
                     <div class="input-group-append">
@@ -39,29 +41,28 @@
 
         </div>
     </div>
-
+<br>
     <form action="/filter" method="post">
-        <div class="row">
+        <div style="padding-left: 18%" class="row">
             <div class="col-12">
-                <div
-                    class="                                                                                                                        radio">
+                <div  class="radio">
                     <span>
                         <span> <input type="radio" name="town_name" class="townButton" value="CA">Cape town</span>
                         <span> <input type="radio" name="town_name" class="townButton" value="CX">Knysna</span>
                         <span> <input type="radio" name="town_name" class="townButton" value="CY">Bellville</span>
                         <span> <input type="radio" name="town_name" class="townButton" value="All">showAll</span>
                         <button type="submit" class="btn btn-warning">Show</button>
-
                     </span>
                 </div>
             </div>
         </div>
     </form>
     <br>
-    <form action="/clear" method="post">
-        <div>
+    <form action="/clear" method="post" onsubmit="return confirm('Are you sure that you want to clear the data')">
 
-            <button type="submit" class="btn btn-info">Clear data</button>
+        <div style="padding-left: 30%">
+            <button type="submit" class="btn btn-info" 
+            >Clear data</button>
 
         </div>
     </form>
@@ -80,6 +81,7 @@
             <li style="list-style:none" class="plates">{{this.registration_num}}</li>
             {{/each}}
         </ul>
+    </div>
     </div>
 </body>
 
