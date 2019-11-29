@@ -54,28 +54,32 @@ app.post('/reg_numbers', async function (req, res) {
   var regnumbers = req.body.regnums;
 
   var regex1 = /([A-Z]){2}\s+([0-9]){3}\s([0-9]){3}/g;
-  var regex = /[A-Z]{2}\s[0-9]{6}/g;
- 
-  var reg2 = regex1.test(regnumbers)
-  var reg = regex.test(regnumbers)
+  var regex2 = /[A-Z]{2}\s[0-9]{6}/g;
+  var regex3 = /[A-Z]{2}\s[0-9]{3}/g;
+  var regex4 = /([A-Z]){2}\s+([0-9]){3}\S([0-9]){3}/g;
 
-  
+  var reg1 = regex1.test(regnumbers);
+  var reg2 = regex2.test(regnumbers);
+  var reg3 = regex3.test(regnumbers);
+  var reg4 = regex4.test(regnumbers);
+
+
   var error = await instance.addingRegsToList(regnumbers)
-
-
-  if(!error){
-  
-    req.flash("info", "registration number already exits")
-  }
 
   if (regnumbers == '') {
     req.flash("info", "Please enter a registration number")
     return res.redirect('/')
   }
-  if (reg2 === true || reg === true) {
+
+  if (!error) {
+
+    req.flash("info", "registration number already exits")
+    return res.redirect('/')
+  }
+  if (reg1 === true || reg2 === true || reg3 === true || reg4 ===true) {
     await instance.addingRegsToList(regnumbers)
   }
-   else {
+  else {
     req.flash("info", "Invalid registration number, the valid starts with CA,CY and CX")
     return res.redirect('/')
   }
@@ -86,7 +90,7 @@ app.post('/reg_numbers', async function (req, res) {
     reg: list
   });
 });
-                                                                                                                                                                                                                                                                                
+
 app.post('/clear', async function (req, res) {
   await instance.clearDatabase()
   res.render('index')

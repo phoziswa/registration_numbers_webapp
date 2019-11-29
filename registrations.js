@@ -16,8 +16,6 @@ module.exports = function RegNumbersFactory(pool) {
             if (regPlate.startsWith(townCode)) {
                 
                 var inserting = await pool.query('INSERT INTO registrations (registration_num ,town_id) VALUES ($1,$2)', [regPlate, id])
-                console.log(inserting.rows);
-
                 return inserting.rows;
             }
         }
@@ -51,20 +49,13 @@ module.exports = function RegNumbersFactory(pool) {
         return filterCities;
     }
 
-    function regexCheck(plate_num) {
-        var regex = /[A-Z]{2}\s[0-9]{6}/g;
-        var reg = regex.test(plate_num)
-        var reg1 = regex.test(plate_num)
-        return !reg && !reg1
-    }
-
+    
     return {
         addingRegsToList,
         getReg,
         town,
         clearDatabase,
         filter,
-        regexCheck
-
+       
     }
 }

@@ -56,9 +56,11 @@ describe('filter function', function () {
         await instance.town('Cape town', 'CA')
         await instance.addingRegsToList("CX 123 234");
         await instance.addingRegsToList("CA 123 145");
+        await instance.addingRegsToList("CA 123 445");
+        await instance.addingRegsToList("CA 132 021");
         await instance.addingRegsToList("CY 123 045");
         var regNum = await instance.filter('CA');
-        assert.deepEqual([{ registration_num: 'CA 123 145', plate_code: 'CA' }], regNum);
+        assert.deepEqual([{ registration_num: 'CA 123 145', plate_code: 'CA', registration_num: 'CA 132 021', plate_code: 'CA',registration_num: 'CA 123 445', plate_code: 'CA' }], regNum);
     });
 });
 
