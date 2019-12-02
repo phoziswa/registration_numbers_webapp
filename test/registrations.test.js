@@ -34,6 +34,10 @@ describe('registration numbers webapp', function () {
     });
 });
 describe('filter function', function () {
+    beforeEach(async function () {
+        await pool.query("delete from registrations;");
+        await pool.query("delete from town;");
+    });
 
     it('should filter for registration numbers from Knysna ', async function () {
         var instance = RegNumbersFactory(pool);
@@ -56,15 +60,21 @@ describe('filter function', function () {
         await instance.town('Cape town', 'CA')
         await instance.addingRegsToList("CX 123 234");
         await instance.addingRegsToList("CA 123 145");
-        await instance.addingRegsToList("CA 123 445");
-        await instance.addingRegsToList("CA 132 021");
         await instance.addingRegsToList("CY 123 045");
         var regNum = await instance.filter('CA');
-        assert.deepEqual([{ registration_num: 'CA 123 145', plate_code: 'CA', registration_num: 'CA 132 021', plate_code: 'CA',registration_num: 'CA 123 445', plate_code: 'CA' }], regNum);
+      
+        assert.deepEqual([{ registration_num: 'CA 123 145', plate_code: 'CA'}], regNum);
     });
 });
 
+
+
 describe('regex function', function () {
+
+    beforeEach(async function () {
+        await pool.query("delete from registrations;");
+        await pool.query("delete from town;");
+    });
     let regex = /[A-Z]{2}\s[0-9]{6}/gm;
     it('should return true if the registration number entered in the text box is correct', function () {
         assert.equal(regex.test('CA 123426'), true)
