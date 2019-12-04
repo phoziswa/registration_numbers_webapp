@@ -70,16 +70,19 @@ describe('filter function', function () {
 describe('new_regex_check_function', function () {
 
     it('should return true if the registration number entered in the text box is correct', function () {
-
         assert.equal(regex_check('CA 123 426'), true)
-        assert.equal(regex_check('CA 123-345'), true)
-        assert.equal(regex_check('CA 123'), true)
-        assert.equal(regex_check('CA 123158'), true)
     });
+    it('should return true if it matches the regex', function () {
+        assert.equal(regex_check('CA 123-345'), true)
 
+    }); it('should return true if it matches the regex', function () {
+        assert.equal(regex_check('CA 123'), true)
+    });
 
     it('should return false if the registration number entered in the text box is incorrect', function () {
         assert.equal(regex_check('CAW 12340006'), false)
+
+    }); it('should return false if it does not match the regex', function () {
         assert.equal(regex_check('CA 006 1tt'), false)
     });
 
