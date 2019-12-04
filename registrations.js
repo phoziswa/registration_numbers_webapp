@@ -5,7 +5,7 @@ module.exports = function RegNumbersFactory(pool) {
         var registrations = await pool.query('SELECT * FROM registrations WHERE registration_num = $1', [regPlate])
 
         if (registrations.rows.length !== 0) {
-            return null;
+            return false;
         }
 
         var allTowns = await pool.query('SELECT * FROM town');

@@ -31,7 +31,7 @@
 
                 <div class="input-group mb-6">
                     <input name="regnums" class="textArea" placeholder="Enter a registration number"
-                        maxlength="10"></input>
+                       onkeyup=" this.value=this.value.toUpperCase();"   maxlength="10" ></input>
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-success">Add</button>
                     </div>

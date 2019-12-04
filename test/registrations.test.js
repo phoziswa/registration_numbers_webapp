@@ -1,5 +1,6 @@
 const assert = require('assert');
 const RegNumbersFactory = require('../registrations');
+const regex_check = require('../regex_check');
 const pg = require("pg");
 const Pool = pg.Pool;
 
@@ -62,25 +63,47 @@ describe('filter function', function () {
         await instance.addingRegsToList("CA 123 145");
         await instance.addingRegsToList("CY 123 045");
         var regNum = await instance.filter('CA');
-      
-        assert.deepEqual([{ registration_num: 'CA 123 145', plate_code: 'CA'}], regNum);
+
+        assert.deepEqual([{ registration_num: 'CA 123 145', plate_code: 'CA' }], regNum);
     });
 });
 
 
 
-describe('regex function', function () {
+// describe('regex function', function () {
 
-    beforeEach(async function () {
-        await pool.query("delete from registrations;");
-        await pool.query("delete from town;");
-    });
-    let regex = /[A-Z]{2}\s[0-9]{6}/gm;
+//     let regex = /([A-Z]){2}\s([0-9]){3}\s([0-9]){3}/g;
+//     it('should return true if the registration number entered in the text box is correct', function () {
+//         assert.equal(regex.test('CA 123 426'), true)
+//     });
+
+//     it('should return false if the registration number entered in the text box is incorrect', function () {
+//         assert.equal(regex.test('CAW 12340006'), false)
+//     });
+// });
+
+
+
+
+describe('new_regex_check_function', function () {
+
     it('should return true if the registration number entered in the text box is correct', function () {
-        assert.equal(regex.test('CA 123426'), true)
+
+        assert.equal(regex_check('CA 123 426'), true)
+        assert.equal(regex_check('CA 123-345'), true)
+        assert.equal(regex_check('CA 123'), true)
+        assert.equal(regex_check('CA 123158'), true)
     });
+
 
     it('should return false if the registration number entered in the text box is incorrect', function () {
-        assert.equal(regex.test('CAW 12340006'), false)
+        assert.equal(regex_check('CAW 12340006'), false)
+        assert.equal(regex_check('CA 006 1tt'), false)
+
+
     });
+
+    after(function () {
+        pool.end();
+    })
 });
