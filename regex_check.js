@@ -9,10 +9,6 @@ module.exports = function regexFunc(regs) {
     var reg_test2 = regex2.test(regs)
     var reg_test3 = regex3.test(regs);
     var reg_test4 = regex4.test(regs);
-
-console.log(reg_test1, reg_test2, reg_test3, reg_test4);
-
-
     if (reg_test1) {
 
         return reg_test1;

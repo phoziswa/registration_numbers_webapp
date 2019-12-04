@@ -53,16 +53,14 @@ app.get('/', function (req, res) {
 
 app.post('/reg_numbers', async function (req, res) {
   var regnumbers = req.body.regnums;
-  
+
   var regex1 = /^([A-Z]){2}\s([0-9]){3}\s([0-9]){3}$/g;
-  //  var regex2 = /[A-Z]{2}\s[0-9]{6}/g;
-   var regex3 = /^[A-Z]{2}\s[0-9]{3}$/g;
-   var regex4 = /^([A-Z]){2}\s([0-9]){3}\S([0-9]){3}$/g;
+  var regex3 = /^[A-Z]{2}\s[0-9]{3}$/g;
+  var regex4 = /^([A-Z]){2}\s([0-9]){3}\S([0-9]){3}$/g;
 
   var reg1 = regex1.test(regnumbers);
-  // var reg2 = regex2.test(regnumbers);
-   var reg3 = regex3.test(regnumbers);
-   var reg4 = regex4.test(regnumbers);
+  var reg3 = regex3.test(regnumbers);
+  var reg4 = regex4.test(regnumbers);
 
   var error = await instance.addingRegsToList(regnumbers)
 
@@ -71,10 +69,10 @@ app.post('/reg_numbers', async function (req, res) {
     return res.redirect('/')
   }
 
-  if(reg1 === true || reg3 === true || reg4 === true) {
+  if (reg1 === true || reg3 === true || reg4 === true) {
     await instance.addingRegsToList(regnumbers)
   }
-  
+
   else {
     req.flash("info", "Invalid registration number, the valid starts with CA,CY and CX")
     return res.redirect('/')

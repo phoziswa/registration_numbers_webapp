@@ -24,7 +24,6 @@ describe('registration numbers webapp', function () {
         var regnumber = await instance.getReg();
         assert.equal(regnumber.length, 1);
     });
-
     it('should not add a registration number if it is on the database already', async function () {
         var instance = RegNumbersFactory(pool);
         await instance.town('Cape town', 'CA')
@@ -68,23 +67,6 @@ describe('filter function', function () {
     });
 });
 
-
-
-// describe('regex function', function () {
-
-//     let regex = /([A-Z]){2}\s([0-9]){3}\s([0-9]){3}/g;
-//     it('should return true if the registration number entered in the text box is correct', function () {
-//         assert.equal(regex.test('CA 123 426'), true)
-//     });
-
-//     it('should return false if the registration number entered in the text box is incorrect', function () {
-//         assert.equal(regex.test('CAW 12340006'), false)
-//     });
-// });
-
-
-
-
 describe('new_regex_check_function', function () {
 
     it('should return true if the registration number entered in the text box is correct', function () {
@@ -99,8 +81,6 @@ describe('new_regex_check_function', function () {
     it('should return false if the registration number entered in the text box is incorrect', function () {
         assert.equal(regex_check('CAW 12340006'), false)
         assert.equal(regex_check('CA 006 1tt'), false)
-
-
     });
 
     after(function () {
